@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-%r+u2_28yl8_vrtku))t!0gsz&%@h2oe$kwr=$x4k33!h*0ap+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -37,10 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'quiz_app',
     'rest_framework',
-    'corsheaders'
+    # 'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -77,10 +77,23 @@ WSGI_APPLICATION = 'quizes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'quizzes$default',
+        'USER' : 'quizzes',
+        'PORT':3306,
+        'PASSWORD':"quiz@123",
+        'HOST':'quizzes.mysql.pythonanywhere-services.com'
     }
 }
 
@@ -118,8 +131,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
+import os
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join( BASE_DIR,'static_root/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
